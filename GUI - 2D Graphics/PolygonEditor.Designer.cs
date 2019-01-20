@@ -55,6 +55,8 @@ namespace GUI___2D_Graphics
             this.DrawVertex = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.BackgroundCB = new System.Windows.Forms.ComboBox();
+            this.RedrawLinesBtn = new System.Windows.Forms.Button();
+            this.ChangeBGLabel = new System.Windows.Forms.Label();
             this.ClearCanvasBtn = new System.Windows.Forms.Button();
             this.FillAllLinesBtn = new System.Windows.Forms.Button();
             this.LineSizeLabel = new System.Windows.Forms.Label();
@@ -63,22 +65,27 @@ namespace GUI___2D_Graphics
             this.VertexSizeLabel = new System.Windows.Forms.Label();
             this.FillVertex = new System.Windows.Forms.CheckBox();
             this.VertexSizeScaler = new System.Windows.Forms.NumericUpDown();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.LineSizeScaler)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.VertexSizeScaler)).BeginInit();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // Canvas
             // 
+            this.Canvas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.Canvas.AutoSize = true;
             this.Canvas.BackColor = System.Drawing.Color.White;
             this.Canvas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Canvas.Cursor = System.Windows.Forms.Cursors.Cross;
             this.Canvas.Location = new System.Drawing.Point(13, 13);
             this.Canvas.Name = "Canvas";
-            this.Canvas.Size = new System.Drawing.Size(629, 588);
+            this.Canvas.Size = new System.Drawing.Size(665, 680);
             this.Canvas.TabIndex = 0;
             this.Canvas.Paint += new System.Windows.Forms.PaintEventHandler(this.Canvas_OnPaint);
             this.Canvas.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Canvas_MouseClick);
@@ -87,9 +94,9 @@ namespace GUI___2D_Graphics
             // 
             this.FillButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.FillButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FillButton.Location = new System.Drawing.Point(6, 497);
+            this.FillButton.Location = new System.Drawing.Point(6, 607);
             this.FillButton.Name = "FillButton";
-            this.FillButton.Size = new System.Drawing.Size(151, 38);
+            this.FillButton.Size = new System.Drawing.Size(170, 38);
             this.FillButton.TabIndex = 1;
             this.FillButton.Text = "Fill in Shape";
             this.FillButton.UseVisualStyleBackColor = true;
@@ -100,7 +107,7 @@ namespace GUI___2D_Graphics
             this.ColorLabel.AutoSize = true;
             this.ColorLabel.BackColor = System.Drawing.Color.Transparent;
             this.ColorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ColorLabel.Location = new System.Drawing.Point(6, 176);
+            this.ColorLabel.Location = new System.Drawing.Point(6, 233);
             this.ColorLabel.Name = "ColorLabel";
             this.ColorLabel.Size = new System.Drawing.Size(183, 25);
             this.ColorLabel.TabIndex = 2;
@@ -163,7 +170,7 @@ namespace GUI___2D_Graphics
             this.fillLabel.AutoSize = true;
             this.fillLabel.BackColor = System.Drawing.Color.Transparent;
             this.fillLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fillLabel.Location = new System.Drawing.Point(6, 327);
+            this.fillLabel.Location = new System.Drawing.Point(6, 436);
             this.fillLabel.Name = "fillLabel";
             this.fillLabel.Size = new System.Drawing.Size(170, 25);
             this.fillLabel.TabIndex = 7;
@@ -233,9 +240,9 @@ namespace GUI___2D_Graphics
             this.groupBox1.Controls.Add(this.BlueRB);
             this.groupBox1.Controls.Add(this.GreenRB);
             this.groupBox1.Controls.Add(this.YellowRB);
-            this.groupBox1.Location = new System.Drawing.Point(6, 204);
+            this.groupBox1.Location = new System.Drawing.Point(6, 261);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(302, 120);
+            this.groupBox1.Size = new System.Drawing.Size(307, 120);
             this.groupBox1.TabIndex = 12;
             this.groupBox1.TabStop = false;
             // 
@@ -317,9 +324,9 @@ namespace GUI___2D_Graphics
             this.groupBox2.Controls.Add(this.FillRedRB);
             this.groupBox2.Controls.Add(this.FillGreenRB);
             this.groupBox2.Controls.Add(this.FillBlueRB);
-            this.groupBox2.Location = new System.Drawing.Point(6, 355);
+            this.groupBox2.Location = new System.Drawing.Point(6, 464);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(302, 136);
+            this.groupBox2.Size = new System.Drawing.Size(307, 136);
             this.groupBox2.TabIndex = 13;
             this.groupBox2.TabStop = false;
             // 
@@ -396,7 +403,7 @@ namespace GUI___2D_Graphics
             this.DrawVertex.Checked = true;
             this.DrawVertex.CheckState = System.Windows.Forms.CheckState.Checked;
             this.DrawVertex.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DrawVertex.Location = new System.Drawing.Point(6, 94);
+            this.DrawVertex.Location = new System.Drawing.Point(6, 84);
             this.DrawVertex.Name = "DrawVertex";
             this.DrawVertex.Size = new System.Drawing.Size(215, 29);
             this.DrawVertex.TabIndex = 14;
@@ -407,24 +414,21 @@ namespace GUI___2D_Graphics
             // groupBox3
             // 
             this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox3.Controls.Add(this.groupBox4);
             this.groupBox3.Controls.Add(this.BackgroundCB);
+            this.groupBox3.Controls.Add(this.RedrawLinesBtn);
+            this.groupBox3.Controls.Add(this.ChangeBGLabel);
             this.groupBox3.Controls.Add(this.ClearCanvasBtn);
             this.groupBox3.Controls.Add(this.FillAllLinesBtn);
-            this.groupBox3.Controls.Add(this.DrawVertex);
             this.groupBox3.Controls.Add(this.groupBox2);
             this.groupBox3.Controls.Add(this.fillLabel);
             this.groupBox3.Controls.Add(this.groupBox1);
             this.groupBox3.Controls.Add(this.ColorLabel);
-            this.groupBox3.Controls.Add(this.LineSizeLabel);
-            this.groupBox3.Controls.Add(this.LineSizeScaler);
             this.groupBox3.Controls.Add(this.completeShapeBtn);
-            this.groupBox3.Controls.Add(this.VertexSizeLabel);
-            this.groupBox3.Controls.Add(this.FillVertex);
-            this.groupBox3.Controls.Add(this.VertexSizeScaler);
             this.groupBox3.Controls.Add(this.FillButton);
-            this.groupBox3.Location = new System.Drawing.Point(648, 4);
+            this.groupBox3.Location = new System.Drawing.Point(684, 4);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(538, 597);
+            this.groupBox3.Size = new System.Drawing.Size(538, 692);
             this.groupBox3.TabIndex = 15;
             this.groupBox3.TabStop = false;
             // 
@@ -435,22 +439,48 @@ namespace GUI___2D_Graphics
             this.BackgroundCB.Items.AddRange(new object[] {
             "Solid White",
             "Solid Black",
-            "Grid on White",
-            "Grid on Black"});
-            this.BackgroundCB.Location = new System.Drawing.Point(304, 22);
+            "Small Grid on White",
+            "Small Grid on Black",
+            "Large Grid on White",
+            "Large Grid on Black"});
+            this.BackgroundCB.Location = new System.Drawing.Point(5, 37);
             this.BackgroundCB.MaxDropDownItems = 4;
             this.BackgroundCB.Name = "BackgroundCB";
-            this.BackgroundCB.Size = new System.Drawing.Size(226, 33);
+            this.BackgroundCB.Size = new System.Drawing.Size(274, 33);
             this.BackgroundCB.TabIndex = 23;
-            this.BackgroundCB.Text = "Select a Background";
-            this.BackgroundCB.SelectedValueChanged += new System.EventHandler(BackgroundCB_SelectedIndexChanged);
+            this.BackgroundCB.Text = "Select a Background Style";
+            this.BackgroundCB.SelectedValueChanged += new System.EventHandler(this.BackgroundCB_SelectedIndexChanged);
+            // 
+            // RedrawLinesBtn
+            // 
+            this.RedrawLinesBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.RedrawLinesBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RedrawLinesBtn.Location = new System.Drawing.Point(6, 387);
+            this.RedrawLinesBtn.Name = "RedrawLinesBtn";
+            this.RedrawLinesBtn.Size = new System.Drawing.Size(249, 38);
+            this.RedrawLinesBtn.TabIndex = 25;
+            this.RedrawLinesBtn.Text = "Redraw Current Lines";
+            this.RedrawLinesBtn.UseVisualStyleBackColor = true;
+            this.RedrawLinesBtn.Click += new System.EventHandler(this.RedrawLinesBtn_Click);
+            // 
+            // ChangeBGLabel
+            // 
+            this.ChangeBGLabel.AutoSize = true;
+            this.ChangeBGLabel.BackColor = System.Drawing.Color.Transparent;
+            this.ChangeBGLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ChangeBGLabel.Location = new System.Drawing.Point(0, 9);
+            this.ChangeBGLabel.Name = "ChangeBGLabel";
+            this.ChangeBGLabel.Size = new System.Drawing.Size(198, 25);
+            this.ChangeBGLabel.TabIndex = 24;
+            this.ChangeBGLabel.Text = "Change Background:";
             // 
             // ClearCanvasBtn
             // 
+            this.ClearCanvasBtn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.ClearCanvasBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ClearCanvasBtn.Location = new System.Drawing.Point(354, 553);
+            this.ClearCanvasBtn.Location = new System.Drawing.Point(358, 649);
             this.ClearCanvasBtn.Name = "ClearCanvasBtn";
-            this.ClearCanvasBtn.Size = new System.Drawing.Size(174, 38);
+            this.ClearCanvasBtn.Size = new System.Drawing.Size(174, 40);
             this.ClearCanvasBtn.TabIndex = 22;
             this.ClearCanvasBtn.Text = "Reset Canvas";
             this.ClearCanvasBtn.UseVisualStyleBackColor = true;
@@ -458,12 +488,13 @@ namespace GUI___2D_Graphics
             // 
             // FillAllLinesBtn
             // 
+            this.FillAllLinesBtn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.FillAllLinesBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FillAllLinesBtn.Location = new System.Drawing.Point(163, 497);
+            this.FillAllLinesBtn.Location = new System.Drawing.Point(6, 651);
             this.FillAllLinesBtn.Name = "FillAllLinesBtn";
-            this.FillAllLinesBtn.Size = new System.Drawing.Size(135, 38);
+            this.FillAllLinesBtn.Size = new System.Drawing.Size(292, 38);
             this.FillAllLinesBtn.TabIndex = 21;
-            this.FillAllLinesBtn.Text = "Fill All Lines";
+            this.FillAllLinesBtn.Text = "Complete Polygon for Me";
             this.FillAllLinesBtn.UseVisualStyleBackColor = true;
             this.FillAllLinesBtn.Click += new System.EventHandler(this.FillAllLinesBtn_Click);
             // 
@@ -472,7 +503,7 @@ namespace GUI___2D_Graphics
             this.LineSizeLabel.AutoSize = true;
             this.LineSizeLabel.BackColor = System.Drawing.Color.Transparent;
             this.LineSizeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LineSizeLabel.Location = new System.Drawing.Point(8, 58);
+            this.LineSizeLabel.Location = new System.Drawing.Point(26, 50);
             this.LineSizeLabel.Name = "LineSizeLabel";
             this.LineSizeLabel.Size = new System.Drawing.Size(99, 25);
             this.LineSizeLabel.TabIndex = 20;
@@ -481,7 +512,7 @@ namespace GUI___2D_Graphics
             // LineSizeScaler
             // 
             this.LineSizeScaler.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LineSizeScaler.Location = new System.Drawing.Point(131, 58);
+            this.LineSizeScaler.Location = new System.Drawing.Point(131, 48);
             this.LineSizeScaler.Maximum = new decimal(new int[] {
             20,
             0,
@@ -506,9 +537,9 @@ namespace GUI___2D_Graphics
             // 
             this.completeShapeBtn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.completeShapeBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.completeShapeBtn.Location = new System.Drawing.Point(304, 497);
+            this.completeShapeBtn.Location = new System.Drawing.Point(322, 605);
             this.completeShapeBtn.Name = "completeShapeBtn";
-            this.completeShapeBtn.Size = new System.Drawing.Size(224, 38);
+            this.completeShapeBtn.Size = new System.Drawing.Size(210, 38);
             this.completeShapeBtn.TabIndex = 18;
             this.completeShapeBtn.Text = "Start New Shape";
             this.completeShapeBtn.UseVisualStyleBackColor = true;
@@ -519,7 +550,7 @@ namespace GUI___2D_Graphics
             this.VertexSizeLabel.AutoSize = true;
             this.VertexSizeLabel.BackColor = System.Drawing.Color.Transparent;
             this.VertexSizeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.VertexSizeLabel.Location = new System.Drawing.Point(6, 22);
+            this.VertexSizeLabel.Location = new System.Drawing.Point(6, 12);
             this.VertexSizeLabel.Name = "VertexSizeLabel";
             this.VertexSizeLabel.Size = new System.Drawing.Size(119, 25);
             this.VertexSizeLabel.TabIndex = 17;
@@ -532,7 +563,7 @@ namespace GUI___2D_Graphics
             this.FillVertex.Checked = true;
             this.FillVertex.CheckState = System.Windows.Forms.CheckState.Checked;
             this.FillVertex.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FillVertex.Location = new System.Drawing.Point(6, 129);
+            this.FillVertex.Location = new System.Drawing.Point(6, 119);
             this.FillVertex.Name = "FillVertex";
             this.FillVertex.Size = new System.Drawing.Size(194, 29);
             this.FillVertex.TabIndex = 16;
@@ -543,7 +574,7 @@ namespace GUI___2D_Graphics
             // VertexSizeScaler
             // 
             this.VertexSizeScaler.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.VertexSizeScaler.Location = new System.Drawing.Point(131, 22);
+            this.VertexSizeScaler.Location = new System.Drawing.Point(131, 12);
             this.VertexSizeScaler.Maximum = new decimal(new int[] {
             20,
             0,
@@ -564,11 +595,26 @@ namespace GUI___2D_Graphics
             0});
             this.VertexSizeScaler.ValueChanged += new System.EventHandler(this.VertexSizeScaler_ValueChanged);
             // 
+            // groupBox4
+            // 
+            this.groupBox4.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox4.Controls.Add(this.VertexSizeLabel);
+            this.groupBox4.Controls.Add(this.VertexSizeScaler);
+            this.groupBox4.Controls.Add(this.LineSizeScaler);
+            this.groupBox4.Controls.Add(this.LineSizeLabel);
+            this.groupBox4.Controls.Add(this.FillVertex);
+            this.groupBox4.Controls.Add(this.DrawVertex);
+            this.groupBox4.Location = new System.Drawing.Point(5, 76);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(250, 154);
+            this.groupBox4.TabIndex = 26;
+            this.groupBox4.TabStop = false;
+            // 
             // PolygonEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1190, 605);
+            this.ClientSize = new System.Drawing.Size(1226, 708);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.Canvas);
             this.DoubleBuffered = true;
@@ -583,6 +629,8 @@ namespace GUI___2D_Graphics
             this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.LineSizeScaler)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.VertexSizeScaler)).EndInit();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -625,6 +673,9 @@ namespace GUI___2D_Graphics
         private System.Windows.Forms.Button FillAllLinesBtn;
         private System.Windows.Forms.Button ClearCanvasBtn;
         private System.Windows.Forms.ComboBox BackgroundCB;
+        private System.Windows.Forms.Label ChangeBGLabel;
+        private System.Windows.Forms.Button RedrawLinesBtn;
+        private System.Windows.Forms.GroupBox groupBox4;
     }
 }
 

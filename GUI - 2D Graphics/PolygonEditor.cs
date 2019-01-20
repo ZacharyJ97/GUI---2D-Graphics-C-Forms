@@ -15,7 +15,7 @@ namespace GUI___2D_Graphics
 {
     public partial class PolygonEditor : Form
     {
-        //Declarations
+        /***************Declarations*********/
 
         //Default user Pen for drawing, and then filling the shape
         public Pen userPen = new Pen(Color.Black, lineSize);
@@ -33,14 +33,18 @@ namespace GUI___2D_Graphics
         private int vertIndex = 0;
         private Point curVertex;
         private int vertCount;
+
         //Our graphics context
         private Graphics polygon;
+
         //Bool for deciding whether you want points on the picture and if you want them filled
         bool drawPoint = true;
         bool fillPoint = true;
         //Int control for brush size and vertex size
         public int vertexSize = 2;
         public static int lineSize = 2;
+
+        /*****************************/
 
         //The whole form
         public PolygonEditor()
@@ -55,6 +59,16 @@ namespace GUI___2D_Graphics
 
         }
 
+        //Handles the fact that we are painting only on the canvas
+        private void Canvas_OnPaint(object sender, PaintEventArgs e)
+        {
+            base.OnPaint(e);
+        }
+        /*End of Window Base Code*/
+        /***************************/
+
+        /*Below are all the methods for visible buttons*/
+         
         //Method to complete the polygon by filling it; it will then reset our array collecting vertices
         //along with its pointer and vertex count
         private void FillBtn_Click(object sender, EventArgs e)
@@ -65,6 +79,9 @@ namespace GUI___2D_Graphics
             }
 
         }
+
+        /*This is actually the New Shape button, user is marking their current polygon 
+         "complete" and moving onto a new one*/
         private void completeShapeBtn_Click(object sender, EventArgs e)
         {
             Array.Clear(vertices, 0, vertices.Length);
@@ -72,19 +89,41 @@ namespace GUI___2D_Graphics
             vertIndex = 0;
         }
 
+        //Corresponds to Complete Polygon For Me Button
         private void FillAllLinesBtn_Click(object sender, EventArgs e)
         {
-            if (vertCount > 2)
+            if (vertCount > 0)
             {
                 polygon.DrawPolygon(userPen, completeVertices);
             }
 
         }
-        //Handles the fact that we are painting only on the canvas
-        private void Canvas_OnPaint(object sender, PaintEventArgs e)
+
+        //Redraws Lines for you
+        private void RedrawLinesBtn_Click(object sender, EventArgs e)
         {
-            base.OnPaint(e);
+            if (vertCount > 1)
+            {
+                polygon.DrawLines(userPen, completeVertices);
+            }
         }
+
+        //Clears the entire canvas of graphics and resets it to white
+        private void ClearCanvasBtn_Click(object sender, EventArgs e)
+        {
+            if (polygon != null && vertCount > 0)
+            {
+                polygon.Clear(Color.White);
+                BackgroundCB.Text = "Select a Background Style";
+                polygon.Dispose();
+                Array.Clear(vertices, 0, vertices.Length);
+                vertCount = 0;
+                vertIndex = 0;
+            }
+
+        }
+        /*End of Button Code*/
+        /**********************************/
 
         //Method that takes in mouse arguments for clicking and then draws the graphics accordingly
         private void Canvas_MouseClick(object sender, MouseEventArgs e)
@@ -165,6 +204,112 @@ namespace GUI___2D_Graphics
                 userPen.Width = lineSize;
             }
         }
+
+        //Combo Box Controls for the Background Changer and what happens for each option
+        private void BackgroundCB_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Graphics grid;
+            grid = Canvas.CreateGraphics();
+            Pen gridPen = new Pen(Color.Black, 1);
+
+            if (BackgroundCB.Items[BackgroundCB.SelectedIndex].ToString() == "Solid White")
+            {
+                grid.Clear(Color.White);
+            }
+
+            if (BackgroundCB.Items[BackgroundCB.SelectedIndex].ToString() == "Solid Black")
+            {
+                grid.Clear(Color.Black);
+            }
+
+            if (BackgroundCB.Items[BackgroundCB.SelectedIndex].ToString() == "Small Grid on White")
+            {
+                grid.Clear(Color.White);
+                gridPen.Color = Color.LightGray;
+                gridPen.Width = 1;
+                int numCells = 200;
+                int cellSize = 10;
+                //Logic for drawing a grid from: https://stackoverflow.com/questions/2753519/efficiently-draw-a-grid-in-windows-forms
+                for (int y = 0; y < numCells; ++y)
+                {
+                    grid.DrawLine(gridPen, 0, y * cellSize, numCells * cellSize, y * cellSize);
+                }
+
+                for (int x = 0; x < numCells; ++x)
+                {
+                    grid.DrawLine(gridPen, x * cellSize, 0, x * cellSize, numCells * cellSize);
+                }
+
+            }
+
+            if (BackgroundCB.Items[BackgroundCB.SelectedIndex].ToString() == "Small Grid on Black")
+            {
+                grid.Clear(Color.Black);
+                gridPen.Color = Color.LightGray;
+                gridPen.Width = 1;
+                int numCells = 200;
+                int cellSize = 10;
+                //Logic for drawing a grid from: https://stackoverflow.com/questions/2753519/efficiently-draw-a-grid-in-windows-forms
+                for (int y = 0; y < numCells; ++y)
+                {
+                    grid.DrawLine(gridPen, 0, y * cellSize, numCells * cellSize, y * cellSize);
+                }
+
+                for (int x = 0; x < numCells; ++x)
+                {
+                    grid.DrawLine(gridPen, x * cellSize, 0, x * cellSize, numCells * cellSize);
+                }
+
+            }
+
+            if (BackgroundCB.Items[BackgroundCB.SelectedIndex].ToString() == "Large Grid on White")
+            {
+                grid.Clear(Color.White);
+                gridPen.Color = Color.LightGray;
+                gridPen.Width = 1;
+                int numCells = 200;
+                int cellSize = 20;
+                //Logic for drawing a grid from: https://stackoverflow.com/questions/2753519/efficiently-draw-a-grid-in-windows-forms
+                for (int y = 0; y < numCells; ++y)
+                {
+                    grid.DrawLine(gridPen, 0, y * cellSize, numCells * cellSize, y * cellSize);
+                }
+
+                for (int x = 0; x < numCells; ++x)
+                {
+                    grid.DrawLine(gridPen, x * cellSize, 0, x * cellSize, numCells * cellSize);
+                }
+
+            }
+
+            if (BackgroundCB.Items[BackgroundCB.SelectedIndex].ToString() == "Large Grid on Black")
+            {
+                grid.Clear(Color.Black);
+                gridPen.Color = Color.LightGray;
+                gridPen.Width = 1;
+                int numCells = 200;
+                int cellSize = 20;
+                //Logic for drawing a grid from: https://stackoverflow.com/questions/2753519/efficiently-draw-a-grid-in-windows-forms
+                for (int y = 0; y < numCells; ++y)
+                {
+                    grid.DrawLine(gridPen, 0, y * cellSize, numCells * cellSize, y * cellSize);
+                }
+
+                for (int x = 0; x < numCells; ++x)
+                {
+                    grid.DrawLine(gridPen, x * cellSize, 0, x * cellSize, numCells * cellSize);
+                }
+
+            }
+
+            //Redrawing lines over background changes
+            if (vertCount > 1)
+            {
+                polygon.DrawLines(userPen, completeVertices);
+            }
+
+        }
+
 
         //Below are all the Radio Button functions to change colors of the line or fill
         private void RedRB_CheckedChanged(object sender, EventArgs e)
@@ -256,66 +401,5 @@ namespace GUI___2D_Graphics
         {
             fillPen = new Pen(Color.Pink, lineSize);
         }
-
-        //Combo Box Controls for the Background Changer
-        private void BackgroundCB_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            Graphics grid;
-            grid = Canvas.CreateGraphics();
-            Pen gridPen = new Pen(Color.Black, 1);
-
-            if (BackgroundCB.Items[BackgroundCB.SelectedIndex].ToString() == "Solid White")
-            {
-                grid.Clear(Color.White);
-            }
-
-            if (BackgroundCB.Items[BackgroundCB.SelectedIndex].ToString() == "Solid Black")
-            {
-                grid.Clear(Color.Black);
-            }
-
-            if (BackgroundCB.Items[BackgroundCB.SelectedIndex].ToString() == "Grid on White")
-            {
-                grid.Clear(Color.White);
-                gridPen.Color = Color.LightGray;
-                gridPen.Width = 1;
-                int numCells = 200;
-                int cellSize = 10;
-                //Logic for drawing a grid from: https://stackoverflow.com/questions/2753519/efficiently-draw-a-grid-in-windows-forms
-                for (int y = 0; y < numCells; ++y)
-                {
-                    grid.DrawLine(gridPen, 0, y * cellSize, numCells * cellSize, y * cellSize);
-                }
-
-                for (int x = 0; x < numCells; ++x)
-                {
-                    grid.DrawLine(gridPen, x * cellSize, 0, x * cellSize, numCells * cellSize);
-                }
-
-            }
-
-            //Redrawing polygon over background changes
-            if (vertCount > 2)
-            {
-                polygon.DrawPolygon(userPen, completeVertices);
-            }
-
-        }
-
-        private void ClearCanvasBtn_Click(object sender, EventArgs e)
-        {
-            if (polygon != null && vertCount > 0)
-            {
-                polygon.Clear(Color.White);
-                BackgroundCB.Text = "Solid White";
-                polygon.Dispose();
-                Array.Clear(vertices, 0, vertices.Length);
-                vertCount = 0;
-                vertIndex = 0;
-            }
-            
-        }
-
-        
     }
 }
