@@ -77,7 +77,6 @@ namespace GUI___2D_Graphics
             {
                 polygon.FillPolygon(fillPen.Brush, completeVertices);
             }
-            polygon.tran
         }
 
         /*This is actually the New Shape button, user is marking their current polygon 
