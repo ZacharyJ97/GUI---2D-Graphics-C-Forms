@@ -77,19 +77,20 @@ namespace GUI___2D_Graphics
             {
                 polygon.FillPolygon(fillPen.Brush, completeVertices);
             }
-
+            polygon.tran
         }
 
         /*This is actually the New Shape button, user is marking their current polygon 
          "complete" and moving onto a new one*/
-        private void completeShapeBtn_Click(object sender, EventArgs e)
+        private void NewShapeBtn_Click(object sender, EventArgs e)
         {
             Array.Clear(vertices, 0, vertices.Length);
             vertCount = 0;
             vertIndex = 0;
         }
 
-        //Corresponds to Complete Polygon For Me Button
+        //Corresponds to Complete Polygon For Me Button, will draw over your lines with new color
+        //and close the polygon with the last edge necessary
         private void FillAllLinesBtn_Click(object sender, EventArgs e)
         {
             if (vertCount > 0)
@@ -114,7 +115,7 @@ namespace GUI___2D_Graphics
             if (polygon != null && vertCount > 0)
             {
                 polygon.Clear(Color.White);
-                BackgroundCB.Text = "Select a Background Style";
+                BackgroundCB.Text = "Select a Canvas Style";
                 polygon.Dispose();
                 Array.Clear(vertices, 0, vertices.Length);
                 vertCount = 0;
@@ -122,10 +123,36 @@ namespace GUI___2D_Graphics
             }
 
         }
+
+        //A custom color palette for lines, both palette button methods show the dialog of color
+        //and then link the chosen color to the appropriate pen, and check the corresponding RB
+        private void LineColorPalBtn_Click(object sender, EventArgs e)
+        {
+            if (lineColorPalette.ShowDialog() == DialogResult.OK)
+            {
+                userPen.Color = lineColorPalette.Color;
+                CustomColorLineRB.Checked = true;
+            }
+        }
+
+        //A custom color palette for filling the shape
+        private void FillColorPalBtn_Click(object sender, EventArgs e)
+        {
+            if (fillColorPalette.ShowDialog() == DialogResult.OK)
+            {
+                fillPen.Color = fillColorPalette.Color;
+                CustomColorFillRB.Checked = true;
+            }
+        }
+
         /*End of Button Code*/
         /**********************************/
 
-        //Method that takes in mouse arguments for clicking and then draws the graphics accordingly
+
+        /*Below is Code for more complex functions and and selections*/
+
+        //Method that takes in mouse arguments for clicking 
+        //and then draws the graphics accordingly. Main drawing method
         private void Canvas_MouseClick(object sender, MouseEventArgs e)
         {
             polygon = Canvas.CreateGraphics();
@@ -154,8 +181,9 @@ namespace GUI___2D_Graphics
                     polygon.DrawLine(userPen, vertices.ElementAt(vertIndex - 1), curVertex);
                 }
                 vertIndex++;
+
                 //Everytime we get a new point, I copy the current list of vertices, exactly as they are, to 
-                //a new array that is used in other functions. Otherwise, empty array slots fill in (0,0)
+                //a new array that is used in other functions. Otherwise, empty array slots fill in (0,0) and draw lines to that location
                 completeVertices = new Point[vertCount];
                 Array.Copy(vertices, completeVertices, vertCount);
             }
@@ -206,8 +234,11 @@ namespace GUI___2D_Graphics
         }
 
         //Combo Box Controls for the Background Changer and what happens for each option
+        //Lot of code here because of the number of choices available and need to draw on
+        //the canvas
         private void BackgroundCB_SelectedIndexChanged(object sender, EventArgs e)
         {
+            //New graphics context is made and drawn over the canvas, separate from our polygon
             Graphics grid;
             grid = Canvas.CreateGraphics();
             Pen gridPen = new Pen(Color.Black, 1);
@@ -222,6 +253,8 @@ namespace GUI___2D_Graphics
                 grid.Clear(Color.Black);
             }
 
+            //Following if will draw a grid of lines, this code will be repeated several times with just changes
+            //in grid size or color scheme
             if (BackgroundCB.Items[BackgroundCB.SelectedIndex].ToString() == "Small Grid on White")
             {
                 grid.Clear(Color.White);
@@ -302,7 +335,7 @@ namespace GUI___2D_Graphics
 
             }
 
-            //Redrawing lines over background changes
+            //Redraws your current lines over background changes, not previous shapes
             if (vertCount > 1)
             {
                 polygon.DrawLines(userPen, completeVertices);
@@ -310,8 +343,11 @@ namespace GUI___2D_Graphics
 
         }
 
+        /*End of Complex function area*/
+        /**************************************************/
 
-        //Below are all the Radio Button functions to change colors of the line or fill
+
+        //Remainder of code is all the Radio Button functions to change colors of the line or fill
         private void RedRB_CheckedChanged(object sender, EventArgs e)
         {
             userPen = new Pen(Color.Red, lineSize);
@@ -400,6 +436,24 @@ namespace GUI___2D_Graphics
         private void FillPinkRB_CheckedChanged(object sender, EventArgs e)
         {
             fillPen = new Pen(Color.Pink, lineSize);
+        }
+
+        private void CustomColorFillRB_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!fillColorPalette.Color.IsEmpty)
+            {
+                fillPen.Color = fillColorPalette.Color;
+            }
+            
+        }
+
+        private void CustomColorLineRB_CheckedChanged(object sender, EventArgs e)
+        {
+            if(!lineColorPalette.Color.IsEmpty)
+            {
+                userPen.Color = lineColorPalette.Color;
+            }
+            
         }
     }
 }
