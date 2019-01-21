@@ -28,6 +28,7 @@ namespace GUI___2D_Graphics
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PolygonEditor));
             this.Canvas = new System.Windows.Forms.Panel();
             this.FillButton = new System.Windows.Forms.Button();
@@ -60,6 +61,9 @@ namespace GUI___2D_Graphics
             this.FillBlackRB = new System.Windows.Forms.RadioButton();
             this.DrawVertex = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.SizingLabel = new System.Windows.Forms.Label();
+            this.CanvasStyleInfo = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.VertexSizeLabel = new System.Windows.Forms.Label();
             this.VertexSizeScaler = new System.Windows.Forms.NumericUpDown();
@@ -73,6 +77,17 @@ namespace GUI___2D_Graphics
             this.NewShapeBtn = new System.Windows.Forms.Button();
             this.lineColorPalette = new System.Windows.Forms.ColorDialog();
             this.fillColorPalette = new System.Windows.Forms.ColorDialog();
+            this.RedrawLinesTip = new System.Windows.Forms.ToolTip(this.components);
+            this.CanvasStyleTip = new System.Windows.Forms.ToolTip(this.components);
+            this.CustomColorTip = new System.Windows.Forms.ToolTip(this.components);
+            this.CustomColorTip2 = new System.Windows.Forms.ToolTip(this.components);
+            this.FillShapeTip = new System.Windows.Forms.ToolTip(this.components);
+            this.NewShapeTip = new System.Windows.Forms.ToolTip(this.components);
+            this.CompleteForMeTip = new System.Windows.Forms.ToolTip(this.components);
+            this.ResetCanvasTip = new System.Windows.Forms.ToolTip(this.components);
+            this.BGColorPalette = new System.Windows.Forms.ColorDialog();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.LineColorRBGroup.SuspendLayout();
             this.FillColorRBGroup.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -284,6 +299,7 @@ namespace GUI___2D_Graphics
             this.LineColorPalBtn.BackColor = System.Drawing.SystemColors.Control;
             this.LineColorPalBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("LineColorPalBtn.BackgroundImage")));
             this.LineColorPalBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.LineColorPalBtn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.LineColorPalBtn.Location = new System.Drawing.Point(235, 126);
             this.LineColorPalBtn.Name = "LineColorPalBtn";
             this.LineColorPalBtn.Size = new System.Drawing.Size(66, 38);
@@ -395,6 +411,7 @@ namespace GUI___2D_Graphics
             this.FillColorPalBtn.BackColor = System.Drawing.SystemColors.Control;
             this.FillColorPalBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("FillColorPalBtn.BackgroundImage")));
             this.FillColorPalBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.FillColorPalBtn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.FillColorPalBtn.Location = new System.Drawing.Point(235, 138);
             this.FillColorPalBtn.Name = "FillColorPalBtn";
             this.FillColorPalBtn.Size = new System.Drawing.Size(66, 38);
@@ -486,6 +503,11 @@ namespace GUI___2D_Graphics
             // groupBox3
             // 
             this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox3.Controls.Add(this.label3);
+            this.groupBox3.Controls.Add(this.label2);
+            this.groupBox3.Controls.Add(this.label1);
+            this.groupBox3.Controls.Add(this.SizingLabel);
+            this.groupBox3.Controls.Add(this.CanvasStyleInfo);
             this.groupBox3.Controls.Add(this.groupBox4);
             this.groupBox3.Controls.Add(this.BackgroundCB);
             this.groupBox3.Controls.Add(this.ChangeBGLabel);
@@ -501,6 +523,38 @@ namespace GUI___2D_Graphics
             this.groupBox3.Size = new System.Drawing.Size(538, 692);
             this.groupBox3.TabIndex = 15;
             this.groupBox3.TabStop = false;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(270, 158);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(158, 22);
+            this.label1.TabIndex = 29;
+            this.label1.Text = "drawn point/line.";
+            // 
+            // SizingLabel
+            // 
+            this.SizingLabel.AutoSize = true;
+            this.SizingLabel.BackColor = System.Drawing.Color.Transparent;
+            this.SizingLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SizingLabel.Location = new System.Drawing.Point(261, 132);
+            this.SizingLabel.Name = "SizingLabel";
+            this.SizingLabel.Size = new System.Drawing.Size(218, 22);
+            this.SizingLabel.TabIndex = 28;
+            this.SizingLabel.Text = "*Changes apply to next";
+            // 
+            // CanvasStyleInfo
+            // 
+            this.CanvasStyleInfo.AutoSize = true;
+            this.CanvasStyleInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CanvasStyleInfo.Location = new System.Drawing.Point(261, 22);
+            this.CanvasStyleInfo.Name = "CanvasStyleInfo";
+            this.CanvasStyleInfo.Size = new System.Drawing.Size(251, 22);
+            this.CanvasStyleInfo.TabIndex = 27;
+            this.CanvasStyleInfo.Text = "*Best to first select a style.";
             // 
             // groupBox4
             // 
@@ -612,7 +666,9 @@ namespace GUI___2D_Graphics
             "Small Grid on White",
             "Small Grid on Black",
             "Large Grid on White",
-            "Large Grid on Black"});
+            "Large Grid on Black",
+            "Custom Color",
+            "Custom Color w/ Small Grid"});
             this.BackgroundCB.Location = new System.Drawing.Point(5, 37);
             this.BackgroundCB.MaxDropDownItems = 4;
             this.BackgroundCB.Name = "BackgroundCB";
@@ -675,6 +731,28 @@ namespace GUI___2D_Graphics
             // fillColorPalette
             // 
             this.fillColorPalette.AnyColor = true;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.Transparent;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(262, 48);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(247, 22);
+            this.label2.TabIndex = 30;
+            this.label2.Text = "*If you rescale the canvas,";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.Transparent;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(270, 70);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(188, 22);
+            this.label3.TabIndex = 31;
+            this.label3.Text = "then reset the style.";
             // 
             // PolygonEditor
             // 
@@ -748,6 +826,20 @@ namespace GUI___2D_Graphics
         private System.Windows.Forms.ColorDialog fillColorPalette;
         private System.Windows.Forms.RadioButton CustomColorLineRB;
         private System.Windows.Forms.RadioButton CustomColorFillRB;
+        private System.Windows.Forms.ToolTip RedrawLinesTip;
+        private System.Windows.Forms.Label CanvasStyleInfo;
+        private System.Windows.Forms.ToolTip CanvasStyleTip;
+        private System.Windows.Forms.Label SizingLabel;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ToolTip CustomColorTip;
+        private System.Windows.Forms.ToolTip CustomColorTip2;
+        private System.Windows.Forms.ToolTip FillShapeTip;
+        private System.Windows.Forms.ToolTip NewShapeTip;
+        private System.Windows.Forms.ToolTip CompleteForMeTip;
+        private System.Windows.Forms.ToolTip ResetCanvasTip;
+        private System.Windows.Forms.ColorDialog BGColorPalette;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
     }
 }
 

@@ -50,13 +50,24 @@ namespace GUI___2D_Graphics
         public PolygonEditor()
         {
             InitializeComponent();
+            //Prevents flickering when drawing/painting
             DoubleBuffered = true;
+
+            //Sets all the tooltips for the form
+            CanvasStyleTip.SetToolTip(BackgroundCB, "Styles will erase all but the current, user-made lines");
+            RedrawLinesTip.SetToolTip(RedrawLinesBtn, "Refills the current user-drawn lines with the selected color.");
+            CustomColorTip.SetToolTip(LineColorPalBtn, "Create your own color for the lines/vertices. Default is black.");
+            CustomColorTip2.SetToolTip(FillColorPalBtn, "Create your own color for filling your shape. Default is black.");
+            FillShapeTip.SetToolTip(FillButton, "Fills the current polygonal area with the selected color.");
+            NewShapeTip.SetToolTip(NewShapeBtn, "Deselects current polygon lines/vertices to allow drawing of a new shape.");
+            CompleteForMeTip.SetToolTip(FillAllLinesBtn, "Draws the completed polygon using the user's lines with the selected color.");
+            ResetCanvasTip.SetToolTip(ClearCanvasBtn, "Clears the canvas and resets the background to white.");
         }
 
         //On the Editor's load, nothing extra necessary
         private void PolygonEditor_Load(object sender, EventArgs e)
         {
-
+           
         }
 
         //Handles the fact that we are painting only on the canvas
@@ -122,7 +133,6 @@ namespace GUI___2D_Graphics
             }
 
         }
-
         //A custom color palette for lines, both palette button methods show the dialog of color
         //and then link the chosen color to the appropriate pen, and check the corresponding RB
         private void LineColorPalBtn_Click(object sender, EventArgs e)
@@ -334,6 +344,36 @@ namespace GUI___2D_Graphics
 
             }
 
+            if (BackgroundCB.Items[BackgroundCB.SelectedIndex].ToString() == "Custom Color")
+            {
+                if (BGColorPalette.ShowDialog() == DialogResult.OK)
+                {
+                    grid.Clear(BGColorPalette.Color);
+                }
+            }
+
+            if (BackgroundCB.Items[BackgroundCB.SelectedIndex].ToString() == "Custom Color w/ Small Grid")
+            {
+                if (BGColorPalette.ShowDialog() == DialogResult.OK)
+                {
+                    grid.Clear(BGColorPalette.Color);
+                    gridPen.Color = Color.LightGray;
+                    gridPen.Width = 1;
+                    int numCells = 200;
+                    int cellSize = 10;
+                    //Logic for drawing a grid from: https://stackoverflow.com/questions/2753519/efficiently-draw-a-grid-in-windows-forms
+                    for (int y = 0; y < numCells; ++y)
+                    {
+                        grid.DrawLine(gridPen, 0, y * cellSize, numCells * cellSize, y * cellSize);
+                    }
+
+                    for (int x = 0; x < numCells; ++x)
+                    {
+                        grid.DrawLine(gridPen, x * cellSize, 0, x * cellSize, numCells * cellSize);
+                    }
+                }
+            }
+
             //Redraws your current lines over background changes, not previous shapes
             if (vertCount > 1)
             {
@@ -448,11 +488,10 @@ namespace GUI___2D_Graphics
 
         private void CustomColorLineRB_CheckedChanged(object sender, EventArgs e)
         {
-            if(!lineColorPalette.Color.IsEmpty)
+            if (!lineColorPalette.Color.IsEmpty)
             {
                 userPen.Color = lineColorPalette.Color;
             }
-            
         }
     }
 }
