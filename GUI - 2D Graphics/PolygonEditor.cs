@@ -23,7 +23,7 @@ namespace GUI___2D_Graphics
 
         //Array to store polygon vertices, Lists would be preferrable, but draw methods
         //are built to take in arrays, and conversion had unintended side effects
-        private Point[] vertices = new Point[40];
+        private Point[] vertices = new Point[100];
 
         //This array is used to take a copy of exactly the amount of vertices the user creates since
         //C# fills the original array with (0,0) in extra, unused slots
@@ -38,16 +38,16 @@ namespace GUI___2D_Graphics
         private Graphics polygon;
 
         //Bool for deciding whether you want points on the picture and if you want them filled
-        bool drawPoint = true;
-        bool fillPoint = true;
+        private bool drawPoint = true;
+        private bool fillPoint = true;
         //Int control for brush size and vertex size
         public int vertexSize = 2;
         public static int lineSize = 2;
 
         //Bool determining if user wants to free paint and then the x and y coords temporarily set to -1
-        bool freePaint = false;
-        int freeX = -1;
-        int freeY = -1;
+        private bool freePaint = false;
+        private int freeX = -1;
+        private int freeY = -1;
 
         /*****************************/
 
@@ -61,7 +61,7 @@ namespace GUI___2D_Graphics
             polygon = Canvas.CreateGraphics();
 
             //Sets all the tooltips for the form
-            CanvasStyleTip.SetToolTip(BackgroundCB, "Styles will erase all but the current, user-made lines");
+            CanvasStyleTip.SetToolTip(BackgroundCB, "Changing styles erases all free-drawn paint and fills, only user-made polygon lines will remain.");
             RedrawLinesTip.SetToolTip(RedrawLinesBtn, "Refills the current user-drawn lines with the selected color.");
             CustomColorTip.SetToolTip(LineColorPalBtn, "Create your own color for the lines/vertices.");
             CustomColorTip2.SetToolTip(FillColorPalBtn, "Create your own color for filling your shape.");
@@ -142,7 +142,8 @@ namespace GUI___2D_Graphics
                 vertCount = 0;
                 vertIndex = 0;
             }
-
+            //Need to remake the polygon graphics context to continue drawing again
+            polygon = Canvas.CreateGraphics();
         }
         //A custom color palette for lines, both palette button methods show the dialog of color
         //and then link the chosen color to the appropriate pen, and check the corresponding RB
@@ -171,9 +172,7 @@ namespace GUI___2D_Graphics
         /**********************************/
 
 
-        /*Below is Code for more complex functions and and selections*/
-
-        
+        /*Below is Code other controls and selections ike checkboxes*/        
 
         //Checkbox to control vertex drawing
         private void DrawVertex_CheckedChanged(object sender, EventArgs e)
@@ -359,7 +358,7 @@ namespace GUI___2D_Graphics
 
         }
 
-        /*End of Complex function area*/
+        /*End of selection and other controls function area*/
         /**************************************************/
 
         /*Functions for Polygon Drawing and then Free Drawing */
@@ -379,7 +378,7 @@ namespace GUI___2D_Graphics
                 if (drawPoint == true && fillPoint == true)
                 {
                     //Draw a point centered at that click location
-                    polygon.FillRectangle(userPen.Brush, (float)(curVertex.X - (vertexSize / 2)), (float)(curVertex.Y - (vertexSize / 2)), (int)vertexSize, (int)vertexSize);
+                    polygon.FillRectangle(userPen.Brush, curVertex.X - (vertexSize / 2), curVertex.Y - (vertexSize / 2), vertexSize, vertexSize);
                 }
                 else if (drawPoint == true && fillPoint == false)
                 {

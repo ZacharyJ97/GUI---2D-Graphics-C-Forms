@@ -109,9 +109,10 @@ namespace GUI___2D_Graphics
             this.Canvas.BackColor = System.Drawing.Color.White;
             this.Canvas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Canvas.Cursor = System.Windows.Forms.Cursors.Cross;
-            this.Canvas.Location = new System.Drawing.Point(13, 13);
+            this.Canvas.Location = new System.Drawing.Point(13, 7);
+            this.Canvas.MinimumSize = new System.Drawing.Size(692, 686);
             this.Canvas.Name = "Canvas";
-            this.Canvas.Size = new System.Drawing.Size(692, 680);
+            this.Canvas.Size = new System.Drawing.Size(692, 686);
             this.Canvas.TabIndex = 0;
             this.Canvas.Paint += new System.Windows.Forms.PaintEventHandler(this.Canvas_OnPaint);
             this.Canvas.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Canvas_MouseClick);
@@ -281,6 +282,7 @@ namespace GUI___2D_Graphics
             // CustomColorLineRB
             // 
             this.CustomColorLineRB.AutoSize = true;
+            this.CustomColorLineRB.Cursor = System.Windows.Forms.Cursors.Hand;
             this.CustomColorLineRB.Location = new System.Drawing.Point(211, 135);
             this.CustomColorLineRB.Name = "CustomColorLineRB";
             this.CustomColorLineRB.Size = new System.Drawing.Size(21, 20);
@@ -317,6 +319,7 @@ namespace GUI___2D_Graphics
             // PinkRB
             // 
             this.PinkRB.AutoSize = true;
+            this.PinkRB.Cursor = System.Windows.Forms.Cursors.Hand;
             this.PinkRB.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PinkRB.Location = new System.Drawing.Point(193, 83);
             this.PinkRB.Name = "PinkRB";
@@ -330,6 +333,7 @@ namespace GUI___2D_Graphics
             // OrangeRB
             // 
             this.OrangeRB.AutoSize = true;
+            this.OrangeRB.Cursor = System.Windows.Forms.Cursors.Hand;
             this.OrangeRB.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.OrangeRB.Location = new System.Drawing.Point(193, 48);
             this.OrangeRB.Name = "OrangeRB";
@@ -343,6 +347,7 @@ namespace GUI___2D_Graphics
             // PurpleRB
             // 
             this.PurpleRB.AutoSize = true;
+            this.PurpleRB.Cursor = System.Windows.Forms.Cursors.Hand;
             this.PurpleRB.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PurpleRB.Location = new System.Drawing.Point(193, 13);
             this.PurpleRB.Name = "PurpleRB";
@@ -356,6 +361,7 @@ namespace GUI___2D_Graphics
             // whiteRB
             // 
             this.whiteRB.AutoSize = true;
+            this.whiteRB.Cursor = System.Windows.Forms.Cursors.Hand;
             this.whiteRB.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.whiteRB.Location = new System.Drawing.Point(91, 83);
             this.whiteRB.Name = "whiteRB";
@@ -405,6 +411,7 @@ namespace GUI___2D_Graphics
             // CustomColorFillRB
             // 
             this.CustomColorFillRB.AutoSize = true;
+            this.CustomColorFillRB.Cursor = System.Windows.Forms.Cursors.Hand;
             this.CustomColorFillRB.Location = new System.Drawing.Point(208, 147);
             this.CustomColorFillRB.Name = "CustomColorFillRB";
             this.CustomColorFillRB.Size = new System.Drawing.Size(21, 20);
@@ -429,6 +436,7 @@ namespace GUI___2D_Graphics
             // FillPinkRB
             // 
             this.FillPinkRB.AutoSize = true;
+            this.FillPinkRB.Cursor = System.Windows.Forms.Cursors.Hand;
             this.FillPinkRB.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FillPinkRB.Location = new System.Drawing.Point(193, 95);
             this.FillPinkRB.Name = "FillPinkRB";
@@ -442,6 +450,7 @@ namespace GUI___2D_Graphics
             // FillWhiteRB
             // 
             this.FillWhiteRB.AutoSize = true;
+            this.FillWhiteRB.Cursor = System.Windows.Forms.Cursors.Hand;
             this.FillWhiteRB.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FillWhiteRB.Location = new System.Drawing.Point(91, 96);
             this.FillWhiteRB.Name = "FillWhiteRB";
@@ -455,6 +464,7 @@ namespace GUI___2D_Graphics
             // FillOrangeRB
             // 
             this.FillOrangeRB.AutoSize = true;
+            this.FillOrangeRB.Cursor = System.Windows.Forms.Cursors.Hand;
             this.FillOrangeRB.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FillOrangeRB.Location = new System.Drawing.Point(193, 60);
             this.FillOrangeRB.Name = "FillOrangeRB";
@@ -468,6 +478,7 @@ namespace GUI___2D_Graphics
             // FillPurpleRB
             // 
             this.FillPurpleRB.AutoSize = true;
+            this.FillPurpleRB.Cursor = System.Windows.Forms.Cursors.Hand;
             this.FillPurpleRB.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FillPurpleRB.Location = new System.Drawing.Point(193, 25);
             this.FillPurpleRB.Name = "FillPurpleRB";
@@ -498,6 +509,7 @@ namespace GUI___2D_Graphics
             this.DrawVertex.BackColor = System.Drawing.Color.Transparent;
             this.DrawVertex.Checked = true;
             this.DrawVertex.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.DrawVertex.Cursor = System.Windows.Forms.Cursors.Hand;
             this.DrawVertex.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DrawVertex.Location = new System.Drawing.Point(6, 84);
             this.DrawVertex.Name = "DrawVertex";
@@ -529,7 +541,10 @@ namespace GUI___2D_Graphics
             this.groupBox3.Controls.Add(this.LineColorRBGroup);
             this.groupBox3.Controls.Add(this.ColorLabel);
             this.groupBox3.Controls.Add(this.NewShapeBtn);
-            this.groupBox3.Location = new System.Drawing.Point(711, 4);
+            this.groupBox3.Cursor = System.Windows.Forms.Cursors.Default;
+            this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox3.Location = new System.Drawing.Point(711, -3);
+            this.groupBox3.MinimumSize = new System.Drawing.Size(538, 692);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(538, 692);
             this.groupBox3.TabIndex = 15;
@@ -577,10 +592,10 @@ namespace GUI___2D_Graphics
             // 
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.Transparent;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(270, 70);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(188, 22);
+            this.label3.Size = new System.Drawing.Size(167, 22);
             this.label3.TabIndex = 31;
             this.label3.Text = "then reset the style.";
             // 
@@ -588,10 +603,10 @@ namespace GUI___2D_Graphics
             // 
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(262, 48);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(247, 22);
+            this.label2.Size = new System.Drawing.Size(220, 22);
             this.label2.TabIndex = 30;
             this.label2.Text = "*If you rescale the canvas,";
             // 
@@ -599,10 +614,10 @@ namespace GUI___2D_Graphics
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(271, 205);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(158, 22);
+            this.label1.Size = new System.Drawing.Size(141, 22);
             this.label1.TabIndex = 29;
             this.label1.Text = "drawn point/line.";
             // 
@@ -610,22 +625,22 @@ namespace GUI___2D_Graphics
             // 
             this.SizingLabel.AutoSize = true;
             this.SizingLabel.BackColor = System.Drawing.Color.Transparent;
-            this.SizingLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SizingLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SizingLabel.Location = new System.Drawing.Point(262, 179);
             this.SizingLabel.Name = "SizingLabel";
-            this.SizingLabel.Size = new System.Drawing.Size(218, 22);
+            this.SizingLabel.Size = new System.Drawing.Size(196, 22);
             this.SizingLabel.TabIndex = 28;
             this.SizingLabel.Text = "*Changes apply to next";
             // 
             // CanvasStyleInfo
             // 
             this.CanvasStyleInfo.AutoSize = true;
-            this.CanvasStyleInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CanvasStyleInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CanvasStyleInfo.Location = new System.Drawing.Point(261, 22);
             this.CanvasStyleInfo.Name = "CanvasStyleInfo";
-            this.CanvasStyleInfo.Size = new System.Drawing.Size(245, 22);
+            this.CanvasStyleInfo.Size = new System.Drawing.Size(221, 22);
             this.CanvasStyleInfo.TabIndex = 27;
-            this.CanvasStyleInfo.Text = "*Best to select a style first";
+            this.CanvasStyleInfo.Text = "*Best to select a style first.";
             // 
             // groupBox4
             // 
@@ -718,6 +733,7 @@ namespace GUI___2D_Graphics
             this.FillVertex.BackColor = System.Drawing.Color.Transparent;
             this.FillVertex.Checked = true;
             this.FillVertex.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.FillVertex.Cursor = System.Windows.Forms.Cursors.Hand;
             this.FillVertex.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FillVertex.Location = new System.Drawing.Point(6, 119);
             this.FillVertex.Name = "FillVertex";
@@ -807,10 +823,11 @@ namespace GUI___2D_Graphics
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1253, 708);
+            this.ClientSize = new System.Drawing.Size(1253, 714);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.Canvas);
             this.DoubleBuffered = true;
+            this.MinimumSize = new System.Drawing.Size(1275, 770);
             this.Name = "PolygonEditor";
             this.Text = "Polygon Creator";
             this.Load += new System.EventHandler(this.PolygonEditor_Load);
