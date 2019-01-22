@@ -44,24 +44,35 @@ namespace GUI___2D_Graphics
         public int vertexSize = 2;
         public static int lineSize = 2;
 
+        //Bool determining if user wants to free paint and then the x and y coords temporarily set to -1
+        bool freePaint = false;
+        int freeX = -1;
+        int freeY = -1;
+
         /*****************************/
 
-        //The whole form
+        //The whole form, initializes other pieces as well
         public PolygonEditor()
         {
             InitializeComponent();
             //Prevents flickering when drawing/painting
             DoubleBuffered = true;
+            //Creating our drawable graphics context
+            polygon = Canvas.CreateGraphics();
 
             //Sets all the tooltips for the form
             CanvasStyleTip.SetToolTip(BackgroundCB, "Styles will erase all but the current, user-made lines");
             RedrawLinesTip.SetToolTip(RedrawLinesBtn, "Refills the current user-drawn lines with the selected color.");
-            CustomColorTip.SetToolTip(LineColorPalBtn, "Create your own color for the lines/vertices. Default is black.");
-            CustomColorTip2.SetToolTip(FillColorPalBtn, "Create your own color for filling your shape. Default is black.");
+            CustomColorTip.SetToolTip(LineColorPalBtn, "Create your own color for the lines/vertices.");
+            CustomColorTip2.SetToolTip(FillColorPalBtn, "Create your own color for filling your shape.");
             FillShapeTip.SetToolTip(FillButton, "Fills the current polygonal area with the selected color.");
             NewShapeTip.SetToolTip(NewShapeBtn, "Deselects current polygon lines/vertices to allow drawing of a new shape.");
             CompleteForMeTip.SetToolTip(FillAllLinesBtn, "Draws the completed polygon using the user's lines with the selected color.");
             ResetCanvasTip.SetToolTip(ClearCanvasBtn, "Clears the canvas and resets the background to white.");
+
+            //Setting default color for color previews
+            LineColorDisplayBox.BackColor = userPen.Color;
+            FillColorDisplayBox.BackColor = fillPen.Color;
         }
 
         //On the Editor's load, nothing extra necessary
@@ -141,6 +152,7 @@ namespace GUI___2D_Graphics
             {
                 userPen.Color = lineColorPalette.Color;
                 CustomColorLineRB.Checked = true;
+                LineColorDisplayBox.BackColor = userPen.Color;
             }
         }
 
@@ -151,6 +163,7 @@ namespace GUI___2D_Graphics
             {
                 fillPen.Color = fillColorPalette.Color;
                 CustomColorFillRB.Checked = true;
+                FillColorDisplayBox.BackColor = fillPen.Color;
             }
         }
 
@@ -160,43 +173,7 @@ namespace GUI___2D_Graphics
 
         /*Below is Code for more complex functions and and selections*/
 
-        //Method that takes in mouse arguments for clicking 
-        //and then draws the graphics accordingly. Main drawing method
-        private void Canvas_MouseClick(object sender, MouseEventArgs e)
-        {
-            polygon = Canvas.CreateGraphics();
-            if (e.Button == MouseButtons.Left && vertIndex <= vertices.Length - 1)
-            {
-                //Storing the Mouse's position on the canvas into a new Point object then add to my list of vertices
-                curVertex = new Point(e.X, e.Y);
-                vertices[vertIndex] = curVertex;
-
-                //Following if-else just checks if we want to draw points and also fill them
-                if (drawPoint == true && fillPoint == true)
-                {
-                    //Draw a point centered at that click location
-                    polygon.FillRectangle(userPen.Brush, (float)(curVertex.X - (vertexSize/2)),(float)(curVertex.Y - (vertexSize / 2)), (int)vertexSize, (int)vertexSize);
-                }
-                else if (drawPoint == true && fillPoint == false)
-                {
-                    //Draw a point centered at that click location
-                    polygon.DrawRectangle(userPen, (float)(curVertex.X - (vertexSize / 2)), (float)(curVertex.Y - (vertexSize / 2)), (int)vertexSize, (int)vertexSize);
-                }
-                vertCount++;
-
-                //As long as we have more than one point, draw a line from the previous point, to the current
-                if (vertCount > 1)
-                {
-                    polygon.DrawLine(userPen, vertices.ElementAt(vertIndex - 1), curVertex);
-                }
-                vertIndex++;
-
-                //Everytime we get a new point, I copy the current list of vertices, exactly as they are, to 
-                //a new array that is used in other functions. Otherwise, empty array slots fill in (0,0) and draw lines to that location
-                completeVertices = new Point[vertCount];
-                Array.Copy(vertices, completeVertices, vertCount);
-            }
-        }
+        
 
         //Checkbox to control vertex drawing
         private void DrawVertex_CheckedChanged(object sender, EventArgs e)
@@ -385,96 +362,184 @@ namespace GUI___2D_Graphics
         /*End of Complex function area*/
         /**************************************************/
 
+        /*Functions for Polygon Drawing and then Free Drawing */
 
-        //Remainder of code is all the Radio Button functions to change colors of the line or fill
+        //Method that takes in mouse arguments for clicking 
+        //and then draws the graphics accordingly. Main drawing method
+        private void Canvas_MouseClick(object sender, MouseEventArgs e)
+        {
+
+            if (e.Button == MouseButtons.Left && vertIndex <= vertices.Length - 1 && freePaint == false)
+            {
+                //Storing the Mouse's position on the canvas into a new Point object then add to my list of vertices
+                curVertex = new Point(e.X, e.Y);
+                vertices[vertIndex] = curVertex;
+
+                //Following if-else just checks if we want to draw points and also fill them
+                if (drawPoint == true && fillPoint == true)
+                {
+                    //Draw a point centered at that click location
+                    polygon.FillRectangle(userPen.Brush, (float)(curVertex.X - (vertexSize / 2)), (float)(curVertex.Y - (vertexSize / 2)), (int)vertexSize, (int)vertexSize);
+                }
+                else if (drawPoint == true && fillPoint == false)
+                {
+                    //Draw a point centered at that click location
+                    polygon.DrawRectangle(userPen, (float)(curVertex.X - (vertexSize / 2)), (float)(curVertex.Y - (vertexSize / 2)), (int)vertexSize, (int)vertexSize);
+                }
+                vertCount++;
+
+                //As long as we have more than one point, draw a line from the previous point, to the current
+                if (vertCount > 1)
+                {
+                    polygon.DrawLine(userPen, vertices.ElementAt(vertIndex - 1), curVertex);
+                }
+                vertIndex++;
+
+                //Everytime we get a new point, I copy the current list of vertices, exactly as they are, to 
+                //a new array that is used in other functions. Otherwise, empty array slots fill in (0,0) and draw lines to that location
+                completeVertices = new Point[vertCount];
+                Array.Copy(vertices, completeVertices, vertCount);
+            }
+        }
+
+        //Free draw with right mouse down
+        private void Canvas_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                freePaint = true;
+                freeX = e.X;
+                freeY = e.Y;
+            }
+        }
+
+        //tracking free drawing movement from right mouse button held down
+        private void Canvas_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (freePaint)
+            {
+
+                polygon.DrawLine(userPen, freeX, freeY, e.X, e.Y);
+
+            }
+            freeX = e.X;
+            freeY = e.Y;
+        }
+        //Turns off free drawing when mouse is up
+        private void Canvas_MouseUp(object sender, MouseEventArgs e)
+        {
+            freePaint = false;
+        }
+        /***********************************/
+
+        //Remainder of code is all the Radio Button functions to 
+        //change colors of the line or fill and also the preview box colors
         private void RedRB_CheckedChanged(object sender, EventArgs e)
         {
             userPen = new Pen(Color.Red, lineSize);
+            LineColorDisplayBox.BackColor = userPen.Color;
         }
 
         private void GreenRB_CheckedChanged(object sender, EventArgs e)
         {
             userPen = new Pen(Color.Green, lineSize);
+            LineColorDisplayBox.BackColor = userPen.Color;
         }
 
         private void BlueRB_CheckedChanged(object sender, EventArgs e)
         {
             userPen = new Pen(Color.Blue, lineSize);
+            LineColorDisplayBox.BackColor = userPen.Color;
         }
 
         private void YellowRB_CheckedChanged(object sender, EventArgs e)
         {
             userPen = new Pen(Color.Yellow, lineSize);
+            LineColorDisplayBox.BackColor = userPen.Color;
         }
 
         private void BlackRB_CheckedChanged(object sender, EventArgs e)
         {
             userPen = new Pen(Color.Black, lineSize);
+            LineColorDisplayBox.BackColor = userPen.Color;
         }
 
         private void whiteRB_CheckedChanged(object sender, EventArgs e)
         {
             userPen = new Pen(Color.White, lineSize);
+            LineColorDisplayBox.BackColor = userPen.Color;
         }
 
         private void FillRedRB_CheckedChanged(object sender, EventArgs e)
         {
             fillPen = new Pen(Color.Red, lineSize);
+            FillColorDisplayBox.BackColor = fillPen.Color;
         }
 
         private void FillGreenRB_CheckedChanged(object sender, EventArgs e)
         {
             fillPen = new Pen(Color.Green, lineSize);
+            FillColorDisplayBox.BackColor = fillPen.Color;
         }
 
         private void FillBlueRB_CheckedChanged(object sender, EventArgs e)
         {
             fillPen = new Pen(Color.Blue, lineSize);
+            FillColorDisplayBox.BackColor = fillPen.Color;
         }
 
         private void FillYellowRB_CheckedChanged(object sender, EventArgs e)
         {
             fillPen = new Pen(Color.Yellow, lineSize);
+            FillColorDisplayBox.BackColor = fillPen.Color;
         }
 
         private void FillBlackRB_CheckedChanged(object sender, EventArgs e)
         {
             fillPen = new Pen(Color.Black, lineSize);
+            FillColorDisplayBox.BackColor = fillPen.Color;
         }
 
         private void FillWhiteRB_CheckedChanged(object sender, EventArgs e)
         {
             fillPen = new Pen(Color.White, lineSize);
+            FillColorDisplayBox.BackColor = fillPen.Color;
         }
 
         private void PurpleRB_CheckedChanged(object sender, EventArgs e)
         {
             userPen = new Pen(Color.Purple, lineSize);
+            LineColorDisplayBox.BackColor = userPen.Color;
         }
 
         private void OrangeRB_CheckedChanged(object sender, EventArgs e)
         {
             userPen = new Pen(Color.Orange, lineSize);
+            LineColorDisplayBox.BackColor = userPen.Color;
         }
 
         private void PinkRB_CheckedChanged(object sender, EventArgs e)
         {
             userPen = new Pen(Color.Pink, lineSize);
+            LineColorDisplayBox.BackColor = userPen.Color;
         }
 
         private void FillPurpleRB_CheckedChanged(object sender, EventArgs e)
         {
             fillPen = new Pen(Color.Purple, lineSize);
+            FillColorDisplayBox.BackColor = fillPen.Color;
         }
 
         private void FillOrangeRB_CheckedChanged(object sender, EventArgs e)
         {
             fillPen = new Pen(Color.Orange, lineSize);
+            FillColorDisplayBox.BackColor = fillPen.Color;
         }
 
         private void FillPinkRB_CheckedChanged(object sender, EventArgs e)
         {
             fillPen = new Pen(Color.Pink, lineSize);
+            FillColorDisplayBox.BackColor = fillPen.Color;
         }
 
         private void CustomColorFillRB_CheckedChanged(object sender, EventArgs e)
@@ -482,8 +547,10 @@ namespace GUI___2D_Graphics
             if (!fillColorPalette.Color.IsEmpty)
             {
                 fillPen.Color = fillColorPalette.Color;
+                FillColorDisplayBox.BackColor = fillPen.Color;
             }
             
+
         }
 
         private void CustomColorLineRB_CheckedChanged(object sender, EventArgs e)
@@ -491,7 +558,10 @@ namespace GUI___2D_Graphics
             if (!lineColorPalette.Color.IsEmpty)
             {
                 userPen.Color = lineColorPalette.Color;
+                LineColorDisplayBox.BackColor = userPen.Color;
             }
+            
         }
+
     }
 }

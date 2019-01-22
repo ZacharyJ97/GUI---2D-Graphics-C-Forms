@@ -61,6 +61,12 @@ namespace GUI___2D_Graphics
             this.FillBlackRB = new System.Windows.Forms.RadioButton();
             this.DrawVertex = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.FillColorPrevLbl = new System.Windows.Forms.Label();
+            this.LineColorPrevLbl = new System.Windows.Forms.Label();
+            this.FillColorDisplayBox = new System.Windows.Forms.Panel();
+            this.LineColorDisplayBox = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.SizingLabel = new System.Windows.Forms.Label();
             this.CanvasStyleInfo = new System.Windows.Forms.Label();
@@ -86,8 +92,6 @@ namespace GUI___2D_Graphics
             this.CompleteForMeTip = new System.Windows.Forms.ToolTip(this.components);
             this.ResetCanvasTip = new System.Windows.Forms.ToolTip(this.components);
             this.BGColorPalette = new System.Windows.Forms.ColorDialog();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.LineColorRBGroup.SuspendLayout();
             this.FillColorRBGroup.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -111,6 +115,9 @@ namespace GUI___2D_Graphics
             this.Canvas.TabIndex = 0;
             this.Canvas.Paint += new System.Windows.Forms.PaintEventHandler(this.Canvas_OnPaint);
             this.Canvas.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Canvas_MouseClick);
+            this.Canvas.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Canvas_MouseDown);
+            this.Canvas.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Canvas_MouseMove);
+            this.Canvas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Canvas_MouseUp);
             // 
             // FillButton
             // 
@@ -502,7 +509,11 @@ namespace GUI___2D_Graphics
             // 
             // groupBox3
             // 
-            this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox3.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.groupBox3.Controls.Add(this.FillColorPrevLbl);
+            this.groupBox3.Controls.Add(this.LineColorPrevLbl);
+            this.groupBox3.Controls.Add(this.FillColorDisplayBox);
+            this.groupBox3.Controls.Add(this.LineColorDisplayBox);
             this.groupBox3.Controls.Add(this.label3);
             this.groupBox3.Controls.Add(this.label2);
             this.groupBox3.Controls.Add(this.label1);
@@ -524,12 +535,72 @@ namespace GUI___2D_Graphics
             this.groupBox3.TabIndex = 15;
             this.groupBox3.TabStop = false;
             // 
+            // FillColorPrevLbl
+            // 
+            this.FillColorPrevLbl.AutoSize = true;
+            this.FillColorPrevLbl.BackColor = System.Drawing.Color.Transparent;
+            this.FillColorPrevLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FillColorPrevLbl.Location = new System.Drawing.Point(314, 477);
+            this.FillColorPrevLbl.Name = "FillColorPrevLbl";
+            this.FillColorPrevLbl.Size = new System.Drawing.Size(133, 25);
+            this.FillColorPrevLbl.TabIndex = 35;
+            this.FillColorPrevLbl.Text = "Color Preview";
+            // 
+            // LineColorPrevLbl
+            // 
+            this.LineColorPrevLbl.AutoSize = true;
+            this.LineColorPrevLbl.BackColor = System.Drawing.Color.Transparent;
+            this.LineColorPrevLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LineColorPrevLbl.Location = new System.Drawing.Point(314, 274);
+            this.LineColorPrevLbl.Name = "LineColorPrevLbl";
+            this.LineColorPrevLbl.Size = new System.Drawing.Size(133, 25);
+            this.LineColorPrevLbl.TabIndex = 34;
+            this.LineColorPrevLbl.Text = "Color Preview";
+            // 
+            // FillColorDisplayBox
+            // 
+            this.FillColorDisplayBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.FillColorDisplayBox.Location = new System.Drawing.Point(319, 505);
+            this.FillColorDisplayBox.Name = "FillColorDisplayBox";
+            this.FillColorDisplayBox.Size = new System.Drawing.Size(139, 36);
+            this.FillColorDisplayBox.TabIndex = 33;
+            // 
+            // LineColorDisplayBox
+            // 
+            this.LineColorDisplayBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.LineColorDisplayBox.Location = new System.Drawing.Point(319, 302);
+            this.LineColorDisplayBox.Name = "LineColorDisplayBox";
+            this.LineColorDisplayBox.Size = new System.Drawing.Size(139, 36);
+            this.LineColorDisplayBox.TabIndex = 32;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.Transparent;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(270, 70);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(188, 22);
+            this.label3.TabIndex = 31;
+            this.label3.Text = "then reset the style.";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.Transparent;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(262, 48);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(247, 22);
+            this.label2.TabIndex = 30;
+            this.label2.Text = "*If you rescale the canvas,";
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(270, 158);
+            this.label1.Location = new System.Drawing.Point(271, 205);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(158, 22);
             this.label1.TabIndex = 29;
@@ -540,7 +611,7 @@ namespace GUI___2D_Graphics
             this.SizingLabel.AutoSize = true;
             this.SizingLabel.BackColor = System.Drawing.Color.Transparent;
             this.SizingLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SizingLabel.Location = new System.Drawing.Point(261, 132);
+            this.SizingLabel.Location = new System.Drawing.Point(262, 179);
             this.SizingLabel.Name = "SizingLabel";
             this.SizingLabel.Size = new System.Drawing.Size(218, 22);
             this.SizingLabel.TabIndex = 28;
@@ -552,9 +623,9 @@ namespace GUI___2D_Graphics
             this.CanvasStyleInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CanvasStyleInfo.Location = new System.Drawing.Point(261, 22);
             this.CanvasStyleInfo.Name = "CanvasStyleInfo";
-            this.CanvasStyleInfo.Size = new System.Drawing.Size(251, 22);
+            this.CanvasStyleInfo.Size = new System.Drawing.Size(245, 22);
             this.CanvasStyleInfo.TabIndex = 27;
-            this.CanvasStyleInfo.Text = "*Best to first select a style.";
+            this.CanvasStyleInfo.Text = "*Best to select a style first";
             // 
             // groupBox4
             // 
@@ -732,28 +803,6 @@ namespace GUI___2D_Graphics
             // 
             this.fillColorPalette.AnyColor = true;
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(262, 48);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(247, 22);
-            this.label2.TabIndex = 30;
-            this.label2.Text = "*If you rescale the canvas,";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.Color.Transparent;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(270, 70);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(188, 22);
-            this.label3.TabIndex = 31;
-            this.label3.Text = "then reset the style.";
-            // 
             // PolygonEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -840,6 +889,10 @@ namespace GUI___2D_Graphics
         private System.Windows.Forms.ColorDialog BGColorPalette;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label LineColorPrevLbl;
+        private System.Windows.Forms.Panel FillColorDisplayBox;
+        private System.Windows.Forms.Panel LineColorDisplayBox;
+        private System.Windows.Forms.Label FillColorPrevLbl;
     }
 }
 
