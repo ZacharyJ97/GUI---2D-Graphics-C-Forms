@@ -27,7 +27,12 @@ namespace GUI___2D_Graphics
 
         //This array is used to take a copy of exactly the amount of vertices the user creates since
         //C# fills the original array with (0,0) in extra, unused slots
-        private Point[] completeVertices;
+        private Point[] completeVertices= new Point[100];
+
+        //This array and its index is just used in the "movement" functions
+        private Point[] moveVertices;
+        private int moveIndex = 0;
+        private int moveSpace = 2;
 
         //Pointer variables to go along with array and the count for each added vertex
         private int vertIndex = 0;
@@ -48,6 +53,9 @@ namespace GUI___2D_Graphics
         private bool freePaint = false;
         private int freeX = -1;
         private int freeY = -1;
+
+        //Variable for BG Color just used for custom ones
+        Color backgroundColor;
 
         /*****************************/
 
@@ -73,6 +81,9 @@ namespace GUI___2D_Graphics
             //Setting default color for color previews
             LineColorDisplayBox.BackColor = userPen.Color;
             FillColorDisplayBox.BackColor = fillPen.Color;
+
+            //Defaulting background to solid white if user does no specifically chose a color
+            BackgroundCB.SelectedIndex = 0;
         }
 
         //On the Editor's load, nothing extra necessary
@@ -135,12 +146,27 @@ namespace GUI___2D_Graphics
         {
             if (polygon != null && vertCount > 0)
             {
+                //Fills canvas with white and the next line resets the combo box back to white
                 polygon.Clear(Color.White);
-                BackgroundCB.Text = "Select a Canvas Style";
-                polygon.Dispose();
-                Array.Clear(vertices, 0, vertices.Length);
+                BackgroundCB.SelectedIndex = 0;
+                
+                //ifs prevent trying to clear a null array
+                if (vertices != null)
+                {
+                    Array.Clear(vertices, 0, vertices.Length);
+                }
+                if (completeVertices != null)
+                {
+                    Array.Clear(completeVertices, 0, completeVertices.Length);
+                }
+                if (moveVertices != null)
+                {
+                    Array.Clear(moveVertices, 0, moveVertices.Length);
+                }
                 vertCount = 0;
                 vertIndex = 0;
+                //Last refresh over everything
+                Canvas.Refresh();
             }
             //Need to remake the polygon graphics context to continue drawing again
             polygon = Canvas.CreateGraphics();
@@ -168,11 +194,20 @@ namespace GUI___2D_Graphics
             }
         }
 
+        //Button corresponding to choosing a custom color for the background
+        private void CustomBGColorBtn_Click(object sender, EventArgs e)
+        {
+            if (BGColorPalette.ShowDialog() == DialogResult.OK)
+            {
+                backgroundColor = BGColorPalette.Color;
+            }
+        }
+
         /*End of Button Code*/
         /**********************************/
 
 
-        /*Below is Code other controls and selections ike checkboxes*/        
+        /*Below is Code other controls and selections ike checkboxes*/
 
         //Checkbox to control vertex drawing
         private void DrawVertex_CheckedChanged(object sender, EventArgs e)
@@ -227,6 +262,7 @@ namespace GUI___2D_Graphics
             Graphics grid;
             grid = Canvas.CreateGraphics();
             Pen gridPen = new Pen(Color.Black, 1);
+            DoubleBuffered = true;
 
             if (BackgroundCB.Items[BackgroundCB.SelectedIndex].ToString() == "Solid White")
             {
@@ -322,17 +358,12 @@ namespace GUI___2D_Graphics
 
             if (BackgroundCB.Items[BackgroundCB.SelectedIndex].ToString() == "Custom Color")
             {
-                if (BGColorPalette.ShowDialog() == DialogResult.OK)
-                {
-                    grid.Clear(BGColorPalette.Color);
-                }
+               grid.Clear(backgroundColor);
             }
 
             if (BackgroundCB.Items[BackgroundCB.SelectedIndex].ToString() == "Custom Color w/ Small Grid")
             {
-                if (BGColorPalette.ShowDialog() == DialogResult.OK)
-                {
-                    grid.Clear(BGColorPalette.Color);
+                    grid.Clear(backgroundColor);
                     gridPen.Color = Color.LightGray;
                     gridPen.Width = 1;
                     int numCells = 200;
@@ -347,7 +378,6 @@ namespace GUI___2D_Graphics
                     {
                         grid.DrawLine(gridPen, x * cellSize, 0, x * cellSize, numCells * cellSize);
                     }
-                }
             }
 
             //Redraws your current lines over background changes, not previous shapes
@@ -562,5 +592,93 @@ namespace GUI___2D_Graphics
             
         }
 
+        private void ArrowUpBtn_Click(object sender, EventArgs e)
+        {
+            if (vertCount > 0)
+            {
+                moveVertices = completeVertices;
+                foreach (Point p in moveVertices)
+                {
+                    Point pMove = new Point(p.X, p.Y - moveSpace);
+                    moveVertices[moveIndex] = pMove;
+                    moveIndex++;
+                }
+                Array.Copy(moveVertices,0, completeVertices, 0, moveVertices.Length);
+                BackgroundCB_SelectedIndexChanged(BackgroundCB, null);
+
+                polygon.DrawLines(userPen, completeVertices);
+            }
+            moveIndex = 0;
+        }
+
+        private void ArrowLeftBtn_Click(object sender, EventArgs e)
+        {
+            if (vertCount > 0)
+            {
+                moveVertices = completeVertices;
+                foreach (Point p in moveVertices)
+                {
+                    Point pMove = new Point(p.X - moveSpace, p.Y);
+                    moveVertices[moveIndex] = pMove;
+                    moveIndex++;
+                }
+                Array.Copy(moveVertices, 0, completeVertices, 0, moveVertices.Length);
+                BackgroundCB_SelectedIndexChanged(BackgroundCB, null);
+
+                polygon.DrawLines(userPen, completeVertices);
+            }
+            moveIndex = 0;
+        }
+
+        private void ArrowDownBtn_Click(object sender, EventArgs e)
+        {
+            if (vertCount > 0)
+            {
+                moveVertices = completeVertices;
+                foreach (Point p in moveVertices)
+                {
+                    Point pMove = new Point(p.X, p.Y + moveSpace);
+                    moveVertices[moveIndex] = pMove;
+                    moveIndex++;
+                }
+                Array.Copy(moveVertices, 0, completeVertices, 0, moveVertices.Length);
+                BackgroundCB_SelectedIndexChanged(BackgroundCB, null);
+                polygon.DrawLines(userPen, completeVertices);
+            }
+            moveIndex = 0;
+        }
+
+        private void ArrowRightBtn_Click(object sender, EventArgs e)
+        {
+            if (vertCount > 0)
+            {
+                moveVertices = completeVertices;
+                foreach (Point p in moveVertices)
+                {
+                    Point pMove = new Point(p.X + moveSpace, p.Y);
+                    moveVertices[moveIndex] = pMove;
+                    moveIndex++;
+                }
+                Array.Copy(moveVertices, 0, completeVertices, 0, moveVertices.Length);
+                BackgroundCB_SelectedIndexChanged(BackgroundCB, null);
+
+                polygon.DrawLines(userPen, completeVertices);
+            }
+            moveIndex = 0;
+        }
+
+        private void MoveSpaceScaler_ValueChanged(object sender, EventArgs e)
+        {
+            if (MoveSpaceScaler.Value >= 1)
+            {
+                moveSpace = (int) MoveSpaceScaler.Value;
+            }
+        }
+
+        private void PolygonEditor_HelpButtonClicked(object sender, CancelEventArgs e)
+        {
+            HelpForm help = new HelpForm();
+            help.ShowDialog();
+        }
     }
 }
