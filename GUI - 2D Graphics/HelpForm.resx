@@ -120,15 +120,14 @@
   <data name="HelpTextBox.Text" xml:space="preserve">
     <value>Basic Controls
 
-Left click the canvas to add a vertex, whether you have vertices drawn or not, the location of the click is utilized like a vertex. Left click elsewhere on the canvas to draw a straight line from the previously clicked point to the next.
+Left click the canvas to add a vertex with the selected line color at the center of the click location. Left click elsewhere on the canvas to add another vertex and draw a straight line from the previously clicked point to the next.
 
-Right click, hold and drag the mouse over the canvas to free draw; line size and color applies to free drawn content. Free drawn content is not affected by the polygonal content. Free drawn content cannot be filled or moved, and vertex size does not affect it.
-
-Canvas size can be adjusted by rescaling the program window, but down-scaling will erase content that spans beyond the new borders, and up-scaling will not have the full canvas style applied unless it is then re-applied after up-scaling.
+Hold right click and drag the mouse over the canvas to free draw; line size and color applies to free drawn content. Free drawn content is often overwritten in prioritization for polygon lines and shapes. Free drawn content cannot be filled or moved, and vertex size does not affect it.
 
 Getting Started
 
-1. Choosing a canvas style should be the first step. Changing it later overwrites all but the currently selected polygon lines; this includes any free drawn items. Custom colors are selected by pressing the button to the right of the Canvas Style Drop-Down Menu and applied by selected a "Custom Color..." option from the menu.
+1. Choosing a canvas style should be the first step. Changing it later overwrites all but the currently selected polygon lines; this includes any free drawn items. Custom colors are selected by pressing the button to the right of the Canvas Style Drop-Down Menu and applied by selected a "Custom Color..." option from the drop-down 
+menu.
 
 2. Choose the line size for drawing content; this does not dynamically resize existing lines. Vertex points may be drawn and filled, just drawn, or transparent. Vertices are squares centered around the mouse pointer click location. 
 

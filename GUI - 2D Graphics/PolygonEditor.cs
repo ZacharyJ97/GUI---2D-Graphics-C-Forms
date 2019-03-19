@@ -1,3 +1,6 @@
+/*Copyright Zachary Fitzpatrick 2019
+ * This program is made for academic pursuits in studying computer graphics and made completely with the C# Windows Forms and Drawing Libraries*/
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,8 +11,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-// This is the code for your desktop app.
-// Press Ctrl+F5 (or go to Debug > Start Without Debugging) to run your app.
 
 namespace GUI___2D_Graphics
 {
@@ -77,6 +78,9 @@ namespace GUI___2D_Graphics
             NewShapeTip.SetToolTip(NewShapeBtn, "Deselects current polygon lines/vertices to allow drawing of a new shape.");
             CompleteForMeTip.SetToolTip(FillAllLinesBtn, "Draws the completed polygon using the user's lines with the selected color.");
             ResetCanvasTip.SetToolTip(ClearCanvasBtn, "Clears the canvas and resets the background to white.");
+            PixelSpacingTip.SetToolTip(MoveSpaceScaler, "Sets the space width in number of pixels to move current user drawn lines.");
+            /*************************************/
+
 
             //Setting default color for color previews
             LineColorDisplayBox.BackColor = userPen.Color;
@@ -680,5 +684,16 @@ namespace GUI___2D_Graphics
             HelpForm help = new HelpForm();
             help.ShowDialog();
         }
+
+        public Panel GetCanvas()
+        {
+            return Canvas;
+        }
+
+        public ComboBox GetBackgroundCB()
+        {
+            return BackgroundCB;
+        }
+
     }
 }

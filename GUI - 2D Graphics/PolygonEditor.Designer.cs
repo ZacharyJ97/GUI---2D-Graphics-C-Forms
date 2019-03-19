@@ -32,9 +32,11 @@ namespace GUI___2D_Graphics
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PolygonEditor));
             this.Canvas = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.ArrowRightBtn = new System.Windows.Forms.Button();
-            this.ArrowUpBtn = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.MoveSpaceScaler = new System.Windows.Forms.NumericUpDown();
             this.ArrowLeftBtn = new System.Windows.Forms.Button();
+            this.ArrowUpBtn = new System.Windows.Forms.Button();
+            this.ArrowRightBtn = new System.Windows.Forms.Button();
             this.ArrowDownBtn = new System.Windows.Forms.Button();
             this.FillButton = new System.Windows.Forms.Button();
             this.ColorLabel = new System.Windows.Forms.Label();
@@ -66,9 +68,14 @@ namespace GUI___2D_Graphics
             this.FillBlackRB = new System.Windows.Forms.RadioButton();
             this.DrawVertex = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.CustomBGColorBtn = new System.Windows.Forms.Button();
             this.FillColorDisplayBox = new System.Windows.Forms.Panel();
             this.LineColorDisplayBox = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.SizingLabel = new System.Windows.Forms.Label();
             this.CanvasStyleInfo = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.VertexSizeLabel = new System.Windows.Forms.Label();
@@ -92,24 +99,16 @@ namespace GUI___2D_Graphics
             this.CompleteForMeTip = new System.Windows.Forms.ToolTip(this.components);
             this.ResetCanvasTip = new System.Windows.Forms.ToolTip(this.components);
             this.BGColorPalette = new System.Windows.Forms.ColorDialog();
-            this.CustomBGColorBtn = new System.Windows.Forms.Button();
-            this.MoveSpaceScaler = new System.Windows.Forms.NumericUpDown();
-            this.label4 = new System.Windows.Forms.Label();
-            this.SizingLabel = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             this.GeneralHelp = new System.Windows.Forms.HelpProvider();
+            this.PixelSpacingTip = new System.Windows.Forms.ToolTip(this.components);
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.MoveSpaceScaler)).BeginInit();
             this.LineColorRBGroup.SuspendLayout();
             this.FillColorRBGroup.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.VertexSizeScaler)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.LineSizeScaler)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.MoveSpaceScaler)).BeginInit();
             this.SuspendLayout();
             // 
             // Canvas
@@ -148,17 +147,52 @@ namespace GUI___2D_Graphics
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Move Your Current Drawn Lines";
             // 
-            // ArrowRightBtn
+            // label4
             // 
-            this.ArrowRightBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ArrowRightBtn.BackgroundImage")));
-            this.ArrowRightBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.ArrowRightBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ArrowRightBtn.Location = new System.Drawing.Point(170, 98);
-            this.ArrowRightBtn.Name = "ArrowRightBtn";
-            this.ArrowRightBtn.Size = new System.Drawing.Size(40, 40);
-            this.ArrowRightBtn.TabIndex = 3;
-            this.ArrowRightBtn.UseVisualStyleBackColor = true;
-            this.ArrowRightBtn.Click += new System.EventHandler(this.ArrowRightBtn_Click);
+            this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.Color.Transparent;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(16, 29);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(181, 25);
+            this.label4.TabIndex = 36;
+            this.label4.Text = "# in Pixels to Move:";
+            // 
+            // MoveSpaceScaler
+            // 
+            this.MoveSpaceScaler.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MoveSpaceScaler.Location = new System.Drawing.Point(212, 27);
+            this.MoveSpaceScaler.Maximum = new decimal(new int[] {
+            30,
+            0,
+            0,
+            0});
+            this.MoveSpaceScaler.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.MoveSpaceScaler.Name = "MoveSpaceScaler";
+            this.MoveSpaceScaler.Size = new System.Drawing.Size(69, 30);
+            this.MoveSpaceScaler.TabIndex = 21;
+            this.MoveSpaceScaler.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.MoveSpaceScaler.ValueChanged += new System.EventHandler(this.MoveSpaceScaler_ValueChanged);
+            // 
+            // ArrowLeftBtn
+            // 
+            this.ArrowLeftBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ArrowLeftBtn.BackgroundImage")));
+            this.ArrowLeftBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.ArrowLeftBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ArrowLeftBtn.Location = new System.Drawing.Point(70, 98);
+            this.ArrowLeftBtn.Name = "ArrowLeftBtn";
+            this.ArrowLeftBtn.Size = new System.Drawing.Size(40, 40);
+            this.ArrowLeftBtn.TabIndex = 1;
+            this.ArrowLeftBtn.UseVisualStyleBackColor = true;
+            this.ArrowLeftBtn.Click += new System.EventHandler(this.ArrowLeftBtn_Click);
             // 
             // ArrowUpBtn
             // 
@@ -172,17 +206,17 @@ namespace GUI___2D_Graphics
             this.ArrowUpBtn.UseVisualStyleBackColor = true;
             this.ArrowUpBtn.Click += new System.EventHandler(this.ArrowUpBtn_Click);
             // 
-            // ArrowLeftBtn
+            // ArrowRightBtn
             // 
-            this.ArrowLeftBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ArrowLeftBtn.BackgroundImage")));
-            this.ArrowLeftBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.ArrowLeftBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ArrowLeftBtn.Location = new System.Drawing.Point(70, 98);
-            this.ArrowLeftBtn.Name = "ArrowLeftBtn";
-            this.ArrowLeftBtn.Size = new System.Drawing.Size(40, 40);
-            this.ArrowLeftBtn.TabIndex = 1;
-            this.ArrowLeftBtn.UseVisualStyleBackColor = true;
-            this.ArrowLeftBtn.Click += new System.EventHandler(this.ArrowLeftBtn_Click);
+            this.ArrowRightBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ArrowRightBtn.BackgroundImage")));
+            this.ArrowRightBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.ArrowRightBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ArrowRightBtn.Location = new System.Drawing.Point(170, 98);
+            this.ArrowRightBtn.Name = "ArrowRightBtn";
+            this.ArrowRightBtn.Size = new System.Drawing.Size(40, 40);
+            this.ArrowRightBtn.TabIndex = 3;
+            this.ArrowRightBtn.UseVisualStyleBackColor = true;
+            this.ArrowRightBtn.Click += new System.EventHandler(this.ArrowRightBtn_Click);
             // 
             // ArrowDownBtn
             // 
@@ -603,8 +637,6 @@ namespace GUI___2D_Graphics
             this.groupBox3.Controls.Add(this.CustomBGColorBtn);
             this.groupBox3.Controls.Add(this.FillColorDisplayBox);
             this.groupBox3.Controls.Add(this.LineColorDisplayBox);
-            this.groupBox3.Controls.Add(this.label3);
-            this.groupBox3.Controls.Add(this.label2);
             this.groupBox3.Controls.Add(this.label1);
             this.groupBox3.Controls.Add(this.label7);
             this.groupBox3.Controls.Add(this.label5);
@@ -628,6 +660,30 @@ namespace GUI___2D_Graphics
             this.groupBox3.Size = new System.Drawing.Size(614, 692);
             this.groupBox3.TabIndex = 15;
             this.groupBox3.TabStop = false;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.BackColor = System.Drawing.Color.Transparent;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(319, 532);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(272, 25);
+            this.label6.TabIndex = 37;
+            this.label6.Text = "*Moving erases other content!";
+            // 
+            // CustomBGColorBtn
+            // 
+            this.CustomBGColorBtn.BackColor = System.Drawing.SystemColors.Control;
+            this.CustomBGColorBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("CustomBGColorBtn.BackgroundImage")));
+            this.CustomBGColorBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.CustomBGColorBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.CustomBGColorBtn.Location = new System.Drawing.Point(266, 34);
+            this.CustomBGColorBtn.Name = "CustomBGColorBtn";
+            this.CustomBGColorBtn.Size = new System.Drawing.Size(66, 38);
+            this.CustomBGColorBtn.TabIndex = 31;
+            this.CustomBGColorBtn.UseVisualStyleBackColor = false;
+            this.CustomBGColorBtn.Click += new System.EventHandler(this.CustomBGColorBtn_Click);
             // 
             // FillColorDisplayBox
             // 
@@ -655,6 +711,39 @@ namespace GUI___2D_Graphics
             this.label1.Size = new System.Drawing.Size(153, 25);
             this.label1.TabIndex = 29;
             this.label1.Text = "drawn point/line.";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.BackColor = System.Drawing.Color.Transparent;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(261, 166);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(215, 25);
+            this.label7.TabIndex = 28;
+            this.label7.Text = "*Changes apply to next";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.Color.Transparent;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(264, 165);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(215, 25);
+            this.label5.TabIndex = 28;
+            this.label5.Text = "*Changes apply to next";
+            // 
+            // SizingLabel
+            // 
+            this.SizingLabel.AutoSize = true;
+            this.SizingLabel.BackColor = System.Drawing.Color.Transparent;
+            this.SizingLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SizingLabel.Location = new System.Drawing.Point(264, 164);
+            this.SizingLabel.Name = "SizingLabel";
+            this.SizingLabel.Size = new System.Drawing.Size(215, 25);
+            this.SizingLabel.TabIndex = 28;
+            this.SizingLabel.Text = "*Changes apply to next";
             // 
             // CanvasStyleInfo
             // 
@@ -843,120 +932,6 @@ namespace GUI___2D_Graphics
             // 
             this.fillColorPalette.AnyColor = true;
             // 
-            // CustomBGColorBtn
-            // 
-            this.CustomBGColorBtn.BackColor = System.Drawing.SystemColors.Control;
-            this.CustomBGColorBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("CustomBGColorBtn.BackgroundImage")));
-            this.CustomBGColorBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.CustomBGColorBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.CustomBGColorBtn.Location = new System.Drawing.Point(266, 34);
-            this.CustomBGColorBtn.Name = "CustomBGColorBtn";
-            this.CustomBGColorBtn.Size = new System.Drawing.Size(66, 38);
-            this.CustomBGColorBtn.TabIndex = 31;
-            this.CustomBGColorBtn.UseVisualStyleBackColor = false;
-            this.CustomBGColorBtn.Click += new System.EventHandler(this.CustomBGColorBtn_Click);
-            // 
-            // MoveSpaceScaler
-            // 
-            this.MoveSpaceScaler.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MoveSpaceScaler.Location = new System.Drawing.Point(212, 27);
-            this.MoveSpaceScaler.Maximum = new decimal(new int[] {
-            30,
-            0,
-            0,
-            0});
-            this.MoveSpaceScaler.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.MoveSpaceScaler.Name = "MoveSpaceScaler";
-            this.MoveSpaceScaler.Size = new System.Drawing.Size(69, 30);
-            this.MoveSpaceScaler.TabIndex = 21;
-            this.MoveSpaceScaler.Value = new decimal(new int[] {
-            2,
-            0,
-            0,
-            0});
-            this.MoveSpaceScaler.ValueChanged += new System.EventHandler(this.MoveSpaceScaler_ValueChanged);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.BackColor = System.Drawing.Color.Transparent;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(16, 29);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(181, 25);
-            this.label4.TabIndex = 36;
-            this.label4.Text = "# in Pixels to Move:";
-            // 
-            // SizingLabel
-            // 
-            this.SizingLabel.AutoSize = true;
-            this.SizingLabel.BackColor = System.Drawing.Color.Transparent;
-            this.SizingLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SizingLabel.Location = new System.Drawing.Point(264, 164);
-            this.SizingLabel.Name = "SizingLabel";
-            this.SizingLabel.Size = new System.Drawing.Size(215, 25);
-            this.SizingLabel.TabIndex = 28;
-            this.SizingLabel.Text = "*Changes apply to next";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.BackColor = System.Drawing.Color.Transparent;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(264, 165);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(215, 25);
-            this.label5.TabIndex = 28;
-            this.label5.Text = "*Changes apply to next";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.BackColor = System.Drawing.Color.Transparent;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(261, 166);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(215, 25);
-            this.label7.TabIndex = 28;
-            this.label7.Text = "*Changes apply to next";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(261, 88);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(240, 25);
-            this.label2.TabIndex = 30;
-            this.label2.Text = "*If you rescale the canvas,";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.Color.Transparent;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(269, 113);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(180, 25);
-            this.label3.TabIndex = 31;
-            this.label3.Text = "then reset the style.";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.BackColor = System.Drawing.Color.Transparent;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(319, 532);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(272, 25);
-            this.label6.TabIndex = 37;
-            this.label6.Text = "*Moving erases other content!";
-            // 
             // PolygonEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -976,6 +951,7 @@ namespace GUI___2D_Graphics
             this.Load += new System.EventHandler(this.PolygonEditor_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.MoveSpaceScaler)).EndInit();
             this.LineColorRBGroup.ResumeLayout(false);
             this.LineColorRBGroup.PerformLayout();
             this.FillColorRBGroup.ResumeLayout(false);
@@ -986,7 +962,6 @@ namespace GUI___2D_Graphics
             this.groupBox4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.VertexSizeScaler)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.LineSizeScaler)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.MoveSpaceScaler)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1060,12 +1035,11 @@ namespace GUI___2D_Graphics
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.NumericUpDown MoveSpaceScaler;
         private System.Windows.Forms.Label SizingLabel;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.HelpProvider GeneralHelp;
+        private System.Windows.Forms.ToolTip PixelSpacingTip;
     }
 }
 
